@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { GradeComponent } from './grade/grade.component';
+import { StudentComponent } from './student/student.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,6 @@ import { AppComponent } from './app.component';
     AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, StudentComponent, GradeComponent]
 })
 export class AppModule { }
