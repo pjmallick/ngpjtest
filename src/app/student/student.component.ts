@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CourseGrade } from 'src/model/course-grade.model';
 import { Student } from 'src/model/student.model';
 import { StudentService } from '../student.service';
@@ -12,9 +13,8 @@ import { StudentService } from '../student.service';
 })
 export class StudentComponent implements OnInit {
   public students:Array<Student> = [];
-  public grade=<CourseGrade>{};
 
-  constructor(public studentService: StudentService) { 
+  constructor(public studentService: StudentService, private router: Router) { 
 
   }
 
@@ -25,20 +25,19 @@ export class StudentComponent implements OnInit {
   
   }
 
-  getGrade(student: Student):void {
-    this.studentService.getGrade(student.id).subscribe((res) => {
-        this.grade= JSON.parse(res);;
-      },(err)=>{console.log(err)});
+//   getGrade(student: Student):void {
+//     this.studentService.getGrade(student.id).subscribe((res) => {
+//         this.grade= JSON.parse(res);;
+//       },(err)=>{console.log(err)});
+  
+//   }
+
+  showGrade(student: Student):void {
+    this.router.navigate(['/grade', { studentId: student.id, name: `${student.lastName},${student.firstName}`  }]);
+   
   
   }
 
-  showGrade(student: Student):void {
-    this.studentService.getGrade(student.id).subscribe((res) => {
-        this.grade= JSON.parse(res);;
-      },(err)=>{console.log(err)});
-  
-  }
-  
   downloadGrade(student: Student):void {
     
   }
