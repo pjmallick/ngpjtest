@@ -22,6 +22,18 @@ export class StudentService {
         return this.httpClient.get(apiUrl, httpOptions);
     }
 
+   public downloadGrade(studentId:number): Observable<any> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/octet-stream'
+            }),
+            responseType: 'blob' as const
+        };
+
+        const apiUrl = `${this.apiUrl}/student/download`;
+        return this.httpClient.post(apiUrl,studentId, { responseType: 'blob' as const});
+    }
+
 
     public getGrade(studentId:number): Observable<any> {
         const httpOptions = {

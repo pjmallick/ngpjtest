@@ -32,7 +32,22 @@ export class GradeComponent implements OnInit {
   }
 
   downloadGrade(): void {
-    
+    this.studentService.downloadGrade(Number(this.studentId)).subscribe((res) => {
+        
+        console.log(this.grades);
+        var blob = new Blob([res], { type: 'application/vnd.ms-excel' });
+        // var blob = new Blob([res], { type: 'text/csv'});
+        var fileName = `${this.studentId}-${new Date().toDateString()}.csv`;
+        var fileURL = window.URL.createObjectURL(blob);      
+        var anchor = document.createElement("a");
+        document.body.appendChild(anchor);
+        anchor.setAttribute("target", "_blank");
+        anchor.setAttribute("href", fileURL);
+        anchor.setAttribute("download", fileName);
+        anchor.click();
+        document.body.removeChild(anchor);        
+
+      },(err)=>{console.log(err)});
   }
 
 }
